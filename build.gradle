@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "23.0.0 rc3"
+
+    defaultConfig {
+        minSdkVersion 11
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+        ndk {
+            moduleName "adapters"
+            ldLibs "log", "z", "m"
+            abiFilters "armeabi", "armeabi-v7a", "x86"
+            cFlags "-std=c++11 -fexceptions"
+            stl "c++_static"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_6
+        targetCompatibility JavaVersion.VERSION_1_6
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:22.2.1'
+}
+
+task buildNative(description: 'Compile JNI source via NDK') {
+    def packageName = "com._0of.adapters."
+
+    // no easy way to get qualified class name
+    // so append any JNI class name here
+    def classes = ["JContext", "NativeAppContext", "UIMessageHandler", "services.impl.NetworkServiceImpl" ]
+
+    // output directory
+    def JNIDes = "$projectDir/src/main/jni/JNI"
+
+    def classesName = ""
+    classes.each{
+        classesName += "$packageName$it,"
+    }
+
+    try {
+        // run ant javah
+        ant.javah(class: classesName, destdir: JNIDes, classpath:"$buildDir/intermediates/classes/debug/", force:true, verbose:true)
+    } catch (def e) {
+        println e
+    }
+}
