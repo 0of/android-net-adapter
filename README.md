@@ -7,5 +7,16 @@ extendable Android native net adapter
 - **C-style network protocol compatibility**
 - **isolated network thread and async request handling**
 
+# Architecture
+- Network
+- Dispatch
+- Core
+- App-adaptor
+
+## Network Layer
+- Socket
+- select based Reactor pattern
+- Network exceptions
+
 # License
   MIT License
