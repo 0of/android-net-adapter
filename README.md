@@ -12,11 +12,29 @@ extendable Android native net adapter
 - Dispatch
 - Core
 - App-adaptor
+- JNI
 
 ## Network Layer
 - Socket
 - select based Reactor pattern
 - Network exceptions
+
+## Dispatch Layer
+- Context
+- EventDispatcher
+- MessageQueue
+- Notifier
+
+## Core Layer
+- ClientRunnable
+- NetworkContext
+- NetworkManager
+- NetworkMessage
+- NetworkMiddleware
+
+## App adaptor Layer
+- CommonApplication
+- Android Implemented application
 
 # License
   MIT License
