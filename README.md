@@ -15,6 +15,7 @@ extendable Android native net adapter
 - JNI
 
 ## Network Layer
+providing basis network infrastructures
 - Socket
 - select based Reactor pattern
 - Network exceptions
@@ -34,7 +35,14 @@ extendable Android native net adapter
 
 ## App adaptor Layer
 - CommonApplication
-- Android Implemented application
+- Android Implemented applictation
+
+## Java classes
+- JContex -> Context _[native]_
+- JMessage -> Message _[native]_
+- NativeAppContext
+- UIMessageQueue <- MessageQueue _[native]_
+- NetworkService -> NetworkManager _[native]_
 
 # License
   MIT License
